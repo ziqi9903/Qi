@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--引用-->
+
+<!--namespace务必和接口的全类名一致 （全类名=包名+类名）-->
+<mapper namespace="com.qi.forum.mapper.UserMapper">
+
+    <insert id="insertUser" parameterType="com.qi.forum.entity.User"  keyProperty="user_id">
+        insert into User (account_id,user_name,user_password,salt,token,gmt_create,gmt_modified,avatar_url)
+        values (#{account_id},#{user_name},#{user_password},#{salt},#{token},#{gmt_create},#{gmt_modified},#{avatar_url})
+    </insert>
+
+    <select id="selectByUserName" resultType="com.qi.forum.entity.User" parameterType="String">
+        select user_id,account_id,user_name,user_password,salt,token,gmt_create,gmt_modified,avatar_url
+        from User
+        where user_name = #{user_name}
+    </select>
+
+    <resultMap id="userMap" type="com.qi.forum.dto.UserRoleDTO">
+        <id column="user_id" property="user_id"></id>
+        <result column="user_name" property="user_name"></result>
+        <collection property="roleList" javaType="list" ofType="com.qi.forum.entity.Role">
+            <id column="role_id" property="role_id"></id>
+            <result column="role_name" property="role_name"></result>
+        </collection>
+    </resultMap>
+
+    <select id="selectByRolesUserName" resultMap="userMap" parameterType="String">
+        SELECT u.user_id ,u.user_name ,r.role_id ,r.role_name
+        FROM `User` u
+                 LEFT JOIN t_user_role AS ur
+                           ON u.user_id= ur.user_id
+                 LEFT JOIN role r
+                           ON ur.role_id = r.role_id
+        WHERE u.user_name = #{user_name}
+    </select>
+
+
+</mapper>

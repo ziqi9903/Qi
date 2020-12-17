@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace务必和接口的全类名一致 （全类名=包名+类名）-->
+<mapper namespace="com.qi.forum.mapper.UserPermsMapper">
+
+    <resultMap id="PermsMap" type="com.qi.forum.dto.UserPermsDTO">
+        <result column="role_name" property="role_name"></result>
+        <collection property="perms" javaType="list" ofType="com.qi.forum.entity.Perms">
+            <id column="perms_id" property="perms_id"></id>
+            <result column="name" property="name"></result>
+            <result column="url" property="url"></result>
+        </collection>
+
+    </resultMap>
+
+    <select id="selectPermsByRoleId" resultMap="PermsMap" parameterType="Long">
+        SELECT p.perms_id,p.name, p.url, r.role_name
+        FROM role r
+                 LEFT JOIN t_role_perms rp
+                           ON r.role_id = rp.role_id
+                 LEFT JOIN perms p
+                           ON rp.pers_id = p.perms_id
+        WHERE r.role_id = #{role_id}
+    </select>
+
+
+</mapper>

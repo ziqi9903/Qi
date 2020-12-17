@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    username: root
+    password: ziqi0327
+    url: jdbc:mysql://47.110.236.7:3306/qi_forum?characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    #Spring Boot 默认是不注入这些属性值的,需要自己绑定
+    #druid 数据源专有配置
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: true
+
+
