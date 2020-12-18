@@ -12,6 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <link rel="stylesheet" th:href="@{css/login/login.css}">
+    <link rel="stylesheet" th:href="@{css/layui.css}">
+    <script th:src="@{js/layui.js}"></script>
 </head>
 
 <body class="text-center body-self">
@@ -19,21 +21,23 @@
 <div th:insert="~{fragment/fragment :: nav}"></div>
 
 <div>
-    <ul>
-        <shiro:hasPermission name="user:add:*">
-            <li><a>ADD</a></li>
-        </shiro:hasPermission>
-        <shiro:hasPermission name="user:update:*">
-            <li><a>update</a></li>
-        </shiro:hasPermission>
-        <shiro:hasPermission name="user:delete:*">
-            <li><a>delete</a></li>
-        </shiro:hasPermission>
-        <shiro:hasPermission name="user:select:*">
-            <li><a>select</a></li>
-        </shiro:hasPermission>
-    </ul>
+    <img th:src="@{img/2.jpg}" class="img-fluid" alt="Responsive image">
+    <hr class="layui-bg-black">
 </div>
+<div>
+    <img th:src="@{img/3.jpg}" class="img-fluid" alt="Responsive image">
+    <hr class="layui-bg-black">
+</div>
+<div>
+    <img th:src="@{img/4.jpg}" class="img-fluid" alt="Responsive image">
+    <hr class="layui-bg-black">
+</div>
+<div>
+    <img th:src="@{img/5.jpg}" class="img-fluid" alt="Responsive image">
+    <hr class="layui-bg-black">
+</div>
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>

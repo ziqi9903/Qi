@@ -42,4 +42,10 @@ public class UserMapperTest {
         UserRoleDTO userRoleDTO = userMapper.selectByRolesUserName("ziqi1");
         System.out.println(userRoleDTO);
     }
+
+    @Test
+    public void testList(){
+        System.out.println(userMapper.list(1, 4));
+        System.out.println(userMapper.count());
+    }
 }
